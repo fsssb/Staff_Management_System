@@ -1,7 +1,25 @@
-# 忽略编译出来的可执行文件
-*.out
-main
-# 忽略中间文件
-*.o
-# 忽略编辑器配置
+# 构建目录
+build/
+cmake-build-*/
+out/
+
+# IDE
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 编译产物
+*.o
+*.a
+*.so
+*.dll
+*.exe
+CMakeCache.txt
+CMakeFiles/
+Makefile
+compile_commands.json
+
+# 其他
+.DS_Store
