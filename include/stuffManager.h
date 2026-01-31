@@ -1,5 +1,12 @@
 #pragma once
 #include <iostream>
+#include "stuff.h"
+#include "employee.h"
+#include "manager.h"
+#include "boss.h"
+
+#include <fstream>
+#define FILENAME "stuffFile.txt"
 
 using namespace std;
 
@@ -13,10 +20,34 @@ public:
     void showMenu(StuffManager& vm);
 
     //退出系统
-
     void exitSystem();
+
+    //记录当前文件中的人员个数
+    int m_StuffNum;
+
+    //员工数组的指针
+    Stuff** m_StuffArray;
+
+    //添加职工函数
+    void add_Stuff();
+
+    //保存文件
+    void saveFile();
+
+    //获取职工人数
+    int GetStuffNum();
+
+    //初始化员工
+    void initStuff();
 
     //析构函数
     ~StuffManager();
+
+private:
+    //清理屏幕并暂停
+    void CleanAndPause();
+
+    //文件是否为空的标志
+    bool m_FileIsEmpty;
     
 };
