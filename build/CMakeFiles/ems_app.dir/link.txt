@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/ems_app.dir/src/main.cpp.o CMakeFiles/ems_app.dir/src/stuffManager.cpp.o -o ems_app 

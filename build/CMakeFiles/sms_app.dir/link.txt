@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/sms_app.dir/src/boss.cpp.o CMakeFiles/sms_app.dir/src/employee.cpp.o CMakeFiles/sms_app.dir/src/main.cpp.o CMakeFiles/sms_app.dir/src/manager.cpp.o CMakeFiles/sms_app.dir/src/stuffManager.cpp.o -o sms_app 
