@@ -1,10 +1,10 @@
-#include "stuffManager.h"
+#include "staffManager.h"
 #include <iostream>
 using namespace std;
 
 
 //构造函数
-StuffManager::StuffManager()
+StaffManager::StaffManager()
 {
     ifstream ifs;
     ifs.open(FILENAME, ios::in);
@@ -14,8 +14,8 @@ StuffManager::StuffManager()
     {
         cout << "文件不存在！" << endl;
         this->m_FileIsEmpty = true;//文件为空标志为真
-        this->m_StuffNum = 0;
-        this->m_StuffArray = nullptr;
+        this->m_StaffNum = 0;
+        this->m_StaffArray = nullptr;
         ifs.close();
         return;
     }
@@ -27,35 +27,35 @@ StuffManager::StuffManager()
     {
         cout << "文件为空！" << endl;
         this->m_FileIsEmpty = true;//文件为空标志为真
-        this->m_StuffNum = 0;
-        this->m_StuffArray = nullptr;
+        this->m_StaffNum = 0;
+        this->m_StaffArray = nullptr;
         ifs.close();
         return;
     }  
 
     //文件存在且不为空的情况 
-    int num = this->GetStuffNum();
+    int num = this->GetStaffNum();
     // cout << "职工个数为：" << num << endl;
 
-    this->m_StuffNum = num;
+    this->m_StaffNum = num;
 
     //将文件中的数据存到数组中
-    this->initStuff();
+    this->initStaff();
     
     //文件为空标志为假！
     this->m_FileIsEmpty = false;
 
-    // for(int i = 0;i < this->m_StuffNum;i++)
+    // for(int i = 0;i < this->m_StaffNum;i++)
     // {
-    //     cout << "职工编号： " << this->m_StuffArray[i]->m_Id
-    //         <<"\t职工姓名：" << this->m_StuffArray[i]->m_name
-    //         <<"\t部门编号：" << this->m_StuffArray[i]->m_DeptId 
+    //     cout << "职工编号： " << this->m_StaffArray[i]->m_Id
+    //         <<"\t职工姓名：" << this->m_StaffArray[i]->m_name
+    //         <<"\t部门编号：" << this->m_StaffArray[i]->m_DeptId 
     //         << endl;
     // }
 }
 
 //展示菜单
-void StuffManager::showMenu(StuffManager& vm)
+void StaffManager::showMenu(StaffManager& vm)
 {
     cout << "--------------------------------------" << endl;
     cout << "--------欢迎使用职工管理系统！--------" << endl;
@@ -77,7 +77,7 @@ void StuffManager::showMenu(StuffManager& vm)
 
 
 //退出系统
-void StuffManager::exitSystem()
+void StaffManager::exitSystem()
 {
     system("clear");
     cout << "欢迎下次使用！" << endl;
@@ -90,7 +90,7 @@ void StuffManager::exitSystem()
 
 
 //添加职工函数
-void StuffManager::add_Stuff()
+void StaffManager::add_Staff()
 {
     cout << "请输入要添加的职工数量：" << endl;
     int addNum = 0;
@@ -99,17 +99,17 @@ void StuffManager::add_Stuff()
     if (addNum > 0)
     {
         //计算一下新的空间的大小
-        int newSize = this->m_StuffNum + addNum;
+        int newSize = this->m_StaffNum + addNum;
 
         //开辟一个新空间
-        Stuff** newSpace = new Stuff*[newSize];
+        Staff** newSpace = new Staff*[newSize];
 
         //将原来空间下的数据拷贝到新空间下
-        if (this->m_StuffArray != nullptr)
+        if (this->m_StaffArray != nullptr)
         {
-            for (int i = 0; i < this->m_StuffNum; i++)
+            for (int i = 0; i < this->m_StaffNum; i++)
             {
-                newSpace[i] = this->m_StuffArray[i];
+                newSpace[i] = this->m_StaffArray[i];
             }
 
         }
@@ -130,17 +130,17 @@ void StuffManager::add_Stuff()
             cin >> dSelect;
 
             //根据岗位选择创建不同类型的职工对象
-            Stuff* newStuff = nullptr;
+            Staff* newStaff = nullptr;
             switch (dSelect)
             {
                 case 1:
-                    newStuff = new Employee(id, name, 1);
+                    newStaff = new Employee(id, name, 1);
                     break;
                 case 2:
-                    newStuff = new Manager(id, name, 2);
+                    newStaff = new Manager(id, name, 2);
                     break;
                 case 3:
-                    newStuff = new Boss(id, name, 3);
+                    newStaff = new Boss(id, name, 3);
                     break;
                 default:
                     cout << "输入有误！" << endl;
@@ -149,16 +149,16 @@ void StuffManager::add_Stuff()
             }
 
             //将新职工添加到数组中
-            newSpace[this->m_StuffNum + i] = newStuff;
+            newSpace[this->m_StaffNum + i] = newStaff;
         }
 
         //释放原有空间
-        delete[] this->m_StuffArray;    
-        this->m_StuffArray = nullptr;
+        delete[] this->m_StaffArray;    
+        this->m_StaffArray = nullptr;
 
         //更新成员变量
-        this->m_StuffArray = newSpace;
-        this->m_StuffNum = newSize;
+        this->m_StaffArray = newSpace;
+        this->m_StaffNum = newSize;
 
         //更新文件为空标志
         this->m_FileIsEmpty = false;
@@ -181,22 +181,22 @@ void StuffManager::add_Stuff()
 }
 
 //保存文件
-void StuffManager::saveFile()
+void StaffManager::saveFile()
 {
     ofstream ofs;
     ofs.open(FILENAME, ios::out);   
-    for (int i = 0; i < this->m_StuffNum; i++)
+    for (int i = 0; i < this->m_StaffNum; i++)
     {
-        ofs << this->m_StuffArray[i]->m_Id << "\t "
-            << this->m_StuffArray[i]->m_name << "\t "
-            << this->m_StuffArray[i]->m_DeptId << endl;
+        ofs << this->m_StaffArray[i]->m_Id << "\t "
+            << this->m_StaffArray[i]->m_name << "\t "
+            << this->m_StaffArray[i]->m_DeptId << endl;
     }
     ofs.close();
 }
 
 
 //获取职工人数  
-int StuffManager::GetStuffNum()
+int StaffManager::GetStaffNum()
 {
     ifstream ifs;
     ifs.open(FILENAME, ios::in); //读文件
@@ -212,7 +212,7 @@ int StuffManager::GetStuffNum()
         num++;
     }
 
-    this->m_StuffNum = num;
+    this->m_StaffNum = num;
 
     ifs.close();
 
@@ -220,7 +220,7 @@ int StuffManager::GetStuffNum()
 }
 
 //初始化员工
-void StuffManager::initStuff()
+void StaffManager::initStaff()
 {
     //初始化职工
     ifstream ifs;
@@ -232,10 +232,10 @@ void StuffManager::initStuff()
     int index = 0;
     
     //开辟内存
-    this->m_StuffArray = new Stuff * [this->m_StuffNum];
+    this->m_StaffArray = new Staff * [this->m_StaffNum];
     while (ifs >> id && ifs >> name && ifs >> dId)
     {
-        Stuff* s = nullptr;
+        Staff* s = nullptr;
         switch (dId)
         {
             case 1:
@@ -248,14 +248,14 @@ void StuffManager::initStuff()
                 s = new Boss(id, name, dId);
                 break;
         }
-        this->m_StuffArray[index] = s;
+        this->m_StaffArray[index] = s;
         index++;
     }
     ifs.close();
 }
 
 //显示职工信息
-void StuffManager::showStuffInfo()
+void StaffManager::showStaffInfo()
 {
     if(this->m_FileIsEmpty)
     {
@@ -264,9 +264,9 @@ void StuffManager::showStuffInfo()
 
     else
     {
-        for(int i = 0;i < this->m_StuffNum;i++)
+        for(int i = 0;i < this->m_StaffNum;i++)
         {
-            this->m_StuffArray[i]->showInfo();
+            this->m_StaffArray[i]->showInfo();
         }
     }
 
@@ -275,12 +275,12 @@ void StuffManager::showStuffInfo()
 
 
 //职工是否在系统里
-int StuffManager::isExist(int id)
+int StaffManager::isExist(int id)
 {
     int index = -1;
-    for(int i = 0;i < this->m_StuffNum; i++)
+    for(int i = 0;i < this->m_StaffNum; i++)
     {
-        if(this->m_StuffArray[i]->m_Id == id)
+        if(this->m_StaffArray[i]->m_Id == id)
         {
             index = i;
             break;
@@ -291,7 +291,7 @@ int StuffManager::isExist(int id)
 
 
 //删除离职职工(按职工ID删除)
-void StuffManager::delStuff()
+void StaffManager::delStaff()
 {
     if(this->m_FileIsEmpty)
     {
@@ -312,11 +312,11 @@ void StuffManager::delStuff()
         else
         {
             int target = this->isExist(id);
-            for (int i = target; i < this->m_StuffNum - 1; i++) //边界条件
+            for (int i = target; i < this->m_StaffNum - 1; i++) //边界条件
              {
-                this->m_StuffArray[i] = this->m_StuffArray[i+1];
+                this->m_StaffArray[i] = this->m_StaffArray[i+1];
             }
-            this->m_StuffNum--;
+            this->m_StaffNum--;
 
             //数据重新写入文件中
             this->saveFile();
@@ -331,7 +331,7 @@ void StuffManager::delStuff()
 
 
 //修改职工信息
-void StuffManager::modify_Stuff()
+void StaffManager::modify_Staff()
 {
     if(this->m_FileIsEmpty){
         cout << "文件不存在或者文件记录为空！" << endl;
@@ -346,7 +346,7 @@ void StuffManager::modify_Stuff()
         int ret = this->isExist(id);
         if(ret != -1)
         {
-            delete this->m_StuffArray[ret];
+            delete this->m_StaffArray[ret];
 
             int newId = 0;
             string newName = "";
@@ -364,23 +364,23 @@ void StuffManager::modify_Stuff()
             cout << "3.老板" << endl;
             cin >> newDSelect;
 
-            Stuff* newStuff = nullptr;
+            Staff* newStaff = nullptr;
             switch(newDSelect)
             {
                 case 1:
-                    newStuff = new Employee(newId,newName,newDSelect);
+                    newStaff = new Employee(newId,newName,newDSelect);
                     break;
                 case 2:
-                    newStuff = new Manager(newId,newName,newDSelect);
+                    newStaff = new Manager(newId,newName,newDSelect);
                     break;
                 case 3:
-                    newStuff = new Boss(newId,newName,newDSelect);
+                    newStaff = new Boss(newId,newName,newDSelect);
                     break;
                 default:
                     break;
             }
 
-            this->m_StuffArray[ret] = newStuff;
+            this->m_StaffArray[ret] = newStaff;
 
             cout << "修改成功! " << endl;
 
@@ -399,7 +399,7 @@ void StuffManager::modify_Stuff()
 
 
 //查找职工
-void StuffManager::findStuff()
+void StaffManager::findStaff()
 {
     if(this->m_FileIsEmpty)
     {
@@ -427,7 +427,7 @@ void StuffManager::findStuff()
                 if(ret != -1)
                 {
                     cout << "找到此人！信息如下" << endl;
-                    this->m_StuffArray[ret]->showInfo();
+                    this->m_StaffArray[ret]->showInfo();
                 } 
                 else
                 {
@@ -447,12 +447,12 @@ void StuffManager::findStuff()
                 cout << "请输入职工姓名" << endl;
                 string name = "";
                 cin >> name;
-                for (int i = 0; i < this->m_StuffNum;i++)
+                for (int i = 0; i < this->m_StaffNum;i++)
                 {
-                    if(this->m_StuffArray[i]->m_name == name)
+                    if(this->m_StaffArray[i]->m_name == name)
                     {
                         cout << "找到此人！信息如下" << endl;
-                        this->m_StuffArray[i]->showInfo();
+                        this->m_StaffArray[i]->showInfo();
                         flag = true;
                     }
                 }
@@ -476,7 +476,7 @@ void StuffManager::findStuff()
 
 
 //职工排序
-void StuffManager::sortStuff()
+void StaffManager::sortStaff()
 {
     if(this->m_FileIsEmpty)
     {
@@ -491,15 +491,15 @@ void StuffManager::sortStuff()
     cin >> select;
 
     //开始选择排序
-    for(int i = 0;i < this->m_StuffNum-1;i++)
+    for(int i = 0;i < this->m_StaffNum-1;i++)
     {
         int targetIndex = i;//记录最大或者最小值
 
-        for(int j = i + 1; j < this->m_StuffNum; j++)
+        for(int j = i + 1; j < this->m_StaffNum; j++)
         {
             if(select == 1)
             {
-                if(this->m_StuffArray[i]->m_Id > this->m_StuffArray[j]->m_Id)
+                if(this->m_StaffArray[i]->m_Id > this->m_StaffArray[j]->m_Id)
                 {
                     targetIndex = j;
                 }
@@ -507,7 +507,7 @@ void StuffManager::sortStuff()
 
             else
             {
-                if(this->m_StuffArray[i]->m_Id < this->m_StuffArray[j]->m_Id)
+                if(this->m_StaffArray[i]->m_Id < this->m_StaffArray[j]->m_Id)
                 {
                     targetIndex = j;
                 }
@@ -515,9 +515,9 @@ void StuffManager::sortStuff()
         }
         if (targetIndex != i)
         {
-            Stuff* temp = this->m_StuffArray[i];
-            this->m_StuffArray[i] = this->m_StuffArray[targetIndex];
-            this->m_StuffArray[targetIndex] = temp;
+            Staff* temp = this->m_StaffArray[i];
+            this->m_StaffArray[i] = this->m_StaffArray[targetIndex];
+            this->m_StaffArray[targetIndex] = temp;
 
         }
     }
@@ -525,11 +525,11 @@ void StuffManager::sortStuff()
     cout << "排序成功！" << endl;
     //保存到文件并展示！
     this->saveFile();
-    this->showStuffInfo(); 
+    this->showStaffInfo(); 
 }
 
 //清空文件
-void StuffManager::cleanFile()
+void StaffManager::cleanFile()
 {
     // 1. 再次确认 (防止手抖误删)
     cout << "确认清空？" << endl;
@@ -548,21 +548,21 @@ void StuffManager::cleanFile()
     ofstream ofs(FILENAME,ios::trunc);
     ofs.close();
 
-    if(this->m_StuffArray != nullptr)
+    if(this->m_StaffArray != nullptr)
     {
         //释放每一个数组对象
-        for(int i = 0; i < this->m_StuffNum; i++)
+        for(int i = 0; i < this->m_StaffNum; i++)
         {
-            delete this->m_StuffArray[i];
-            this->m_StuffArray[i] = nullptr;
+            delete this->m_StaffArray[i];
+            this->m_StaffArray[i] = nullptr;
         }        
     }
     //再释放整个数组指针本身
-    delete[] this->m_StuffArray;
-    this->m_StuffArray = nullptr;
+    delete[] this->m_StaffArray;
+    this->m_StaffArray = nullptr;
 
     //计数清零
-    this->m_StuffNum = 0;
+    this->m_StaffNum = 0;
 
     //更新文件标志位
     this->m_FileIsEmpty = true;
@@ -573,7 +573,7 @@ void StuffManager::cleanFile()
 }
 
 //清理屏幕并暂停
-void StuffManager::CleanAndPause()
+void StaffManager::CleanAndPause()
 {
     cout << "请按任意键继续..." << endl;
     cin.ignore(1024, '\n');
@@ -583,19 +583,19 @@ void StuffManager::CleanAndPause()
 
 
 //析构函数
-StuffManager::~StuffManager()
+StaffManager::~StaffManager()
 {
-    if (this->m_StuffArray != nullptr)
+    if (this->m_StaffArray != nullptr)
     {
-        for (int i = 0; i < this->m_StuffNum; i++)
+        for (int i = 0; i < this->m_StaffNum; i++)
         {   
-            if (this->m_StuffArray[i] != nullptr)
+            if (this->m_StaffArray[i] != nullptr)
             {
             //删除每一个职工对象
-            delete this->m_StuffArray[i];
+            delete this->m_StaffArray[i];
             }
         }
         //删除职工数组
-        delete[] this->m_StuffArray;
+        delete[] this->m_StaffArray;
     }
 }

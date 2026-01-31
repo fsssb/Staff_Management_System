@@ -1,6 +1,6 @@
 
 ---
-# 🏢 Stuff Management System (基于多态的职工管理系统)
+# 🏢 Staff Management System (基于多态的职工管理系统)
 
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-14%2F17-blue.svg?style=flat&logo=c%2B%2B)](https://en.cppreference.com/)
 [![Build System](https://img.shields.io/badge/Build-CMake-green.svg)](https://cmake.org/)
@@ -14,7 +14,7 @@
 ## ✨ 功能特性 (Features)
 
 - **多态设计**：利用虚函数实现不同职级（普通员工、经理、老板）的动态绑定。
-- **动态数组管理**：使用指针数组 (`Stuff**`) 管理对象，支持运行时动态扩容。
+- **动态数组管理**：使用指针数组 (`Staff**`) 管理对象，支持运行时动态扩容。
 - **文件持久化**：支持将职工数据保存到本地文件，并在程序启动时自动读取。
 - **完整的 CRUD 操作**：
   - ✅ **增加职工**：批量添加不同职级的员工。
@@ -37,13 +37,13 @@
 ├── README.md           # 项目说明文档
 ├── src/                # 源文件 (.cpp)
 │   ├── main.cpp        # 程序入口
-│   ├── stuffManager.cpp # 核心管理类实现
+│   ├── staffManager.cpp # 核心管理类实现
 │   ├── employee.cpp    # 普通员工实现
 │   ├── manager.cpp     # 经理实现
 │   └── boss.cpp        # 老板实现
 └── include/            # 头文件 (.h)
-    ├── stuff.h         # 抽象基类 (Abstract Base Class)
-    ├── stuffManager.h  # 管理类声明
+    ├── staff.h         # 抽象基类 (Abstract Base Class)
+    ├── staffManager.h  # 管理类声明
     └── ...
 ```
 
@@ -61,8 +61,8 @@
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/fsssb/Stuff_Management_System.git
-   cd Stuff_Management_System
+   git clone https://github.com/fsssb/Staff_Management_System.git
+   cd Staff_Management_System
    ```
 
 2. **创建构建目录**

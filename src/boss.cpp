@@ -1,5 +1,7 @@
 #include "boss.h"
 
+using namespace std;
+
 Boss::Boss(int id,string name,int dId)
 {
     this->m_Id = id;

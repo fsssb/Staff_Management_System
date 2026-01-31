@@ -1,8 +1,10 @@
 #include <iostream>
-#include "stuffManager.h"
+#include "staffManager.h"
 
 #include <unistd.h>
 #include <termios.h>
+
+using namespace std;
 
 
 inline void pauseLinux()
@@ -15,21 +17,21 @@ inline void pauseLinux()
 
 // void test01()  //代码重复，可以改进！
 // {
-//     Stuff* stuff = nullptr;
-//     stuff = new Employee(1111,"fsssb",6);    
-//     stuff->showInfo();
-//     delete stuff;
-//     stuff = nullptr;
+//     Staff* Staff = nullptr;
+//     Staff = new Employee(1111,"fsssb",6);    
+//     Staff->showInfo();
+//     delete Staff;
+//     Staff = nullptr;
 
-//     stuff = new Manager(2222,"czy",5);    
-//     stuff->showInfo();
-//     delete stuff;
-//     stuff = nullptr;
+//     Staff = new Manager(2222,"czy",5);    
+//     Staff->showInfo();
+//     delete Staff;
+//     Staff = nullptr;
 
-//     stuff = new Boss(3333,"HITSZ",9);    
-//     stuff->showInfo();
-//     delete stuff;
-//     stuff = nullptr;
+//     Staff = new Boss(3333,"HITSZ",9);    
+//     Staff->showInfo();
+//     delete Staff;
+//     Staff = nullptr;
 // }
 
 int main()
@@ -38,7 +40,7 @@ int main()
     // test01();
 
     //实例化管理者
-    StuffManager sm;
+    StaffManager sm;
 
     int choice = 0;
     while(true)
@@ -55,22 +57,22 @@ int main()
                 sm.exitSystem();
                 break;
             case 1://添加职工
-                sm.add_Stuff();
+                sm.add_Staff();
                 break;
             case 2://显示职工
-                sm.showStuffInfo();
+                sm.showStaffInfo();
                 break;
             case 3://删除职工
-                sm.delStuff();
+                sm.delStaff();
                 break;
             case 4://修改职工
-                sm.modify_Stuff();
+                sm.modify_Staff();
                 break;
             case 5://查找职工
-                sm.findStuff();
+                sm.findStaff();
                 break;
             case 6://排序职工
-                sm.sortStuff();
+                sm.sortStaff();
                 break;
             case 7://清空文件
                 sm.cleanFile();

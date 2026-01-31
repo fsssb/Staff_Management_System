@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-#include "stuff.h"
+#include "staff.h"
 
 
 
-class Manager: public Stuff
+class Manager: public Staff
 {
 public:
 

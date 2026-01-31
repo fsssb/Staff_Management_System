@@ -1,5 +1,8 @@
 #include "manager.h"
 
+using namespace std;
+
+
 Manager::Manager(int id,string name,int dId)
 {
     this->m_Id = id;

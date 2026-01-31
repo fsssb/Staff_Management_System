@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # 2. 项目名称 
-project(Stuff_Management_System)
+project(Staff_Management_System)
 
 # 3. 设置 C++ 标准 
 set(CMAKE_CXX_STANDARD 17)

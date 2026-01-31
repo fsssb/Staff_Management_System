@@ -4,7 +4,7 @@
 
 
 
-class Stuff
+class Staff
 {
 public:
     //显示个人信息
@@ -13,7 +13,7 @@ public:
     //获取岗位名称
     virtual std::string getDeptName() = 0;
 
-    virtual ~Stuff() = default;
+    virtual ~Staff() = default;
 
     int m_Id;//职工编号
     std::string m_name; //职工姓名
